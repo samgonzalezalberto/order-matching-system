@@ -1,0 +1,17 @@
+services:
+  engine:
+    build:
+      context: .
+      target: runtime
+    image: order-matching-engine
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  # `docker compose --profile test build test` builds the image and runs the suite;
+  # the build fails if any test fails.
+  test:
+    build:
+      context: .
+      target: test
+    profiles: ["test"]
